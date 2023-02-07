@@ -31,7 +31,7 @@ pipeline {
 				echo "PATH - $PATH"
 				echo "BUILD_NUMBER - $env.BUILD_NUMBER"
 				echo "BUILD_TAG - $env.BUILD_TAG"
-				Use a shell script.
+				//Use a shell script.
 				sh "mvn --version"
 				sh "docker --version"
 			}
