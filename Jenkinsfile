@@ -19,7 +19,7 @@ pipeline {
 	environment {
 		// Names are from the Jenkins configurations.
 		// Manage Jenkins -> Global Tool Configuration
-		dockerHome = tool 'MyDocker'
+		dockerHome = tool 'myDocker'
 		mavenHome = tool 'myMaven'
 
 		PATH = "$PATH:$dockerHome/bin:$mavenHome/bin"
