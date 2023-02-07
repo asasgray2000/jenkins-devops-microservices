@@ -14,8 +14,16 @@
 
 // DECLARATIVE
 pipeline {
-	//agent any
-	agent { docker { image 'maven:3.6.3' } }
+	agent any
+	//agent { docker { image 'maven' } }
+	environment {
+		// Names are from the Jenkins configurations.
+		// Manage Jenkins -> Global Tool Configuration
+		dockerHome = tool 'MyDocker'
+		mavenHome = tool 'myMaven'
+
+		PATH = "$PATH:$dockerHome/bin:$mavenHome/bin"
+	}
 	stages {
 		stage('Build') {
 			steps {
@@ -24,7 +32,8 @@ pipeline {
 				// echo "BUILD_NUMBER - $env.BUILD_NUMBER"
 				// echo "BUILD_TAG - $env.BUILD_TAG"
 				// Use a shell script.
-				//sh "mvn --version"
+				sh "mvn --version"
+				sh "docker --version"
 			}
 		}
 		stage('Test') {
