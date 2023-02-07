@@ -38,10 +38,11 @@ pipeline {
 				sh "docker --version"
 			}
 		}
+		// This is done inside the Jenkins Docker Container.
 		stage('Compile') {
 			steps {
 				echo "Compile Step"
-				sh "mvn clean install"
+				sh "mvn clean compile"
 			}
 		}
 		stage('Test') {
@@ -54,6 +55,34 @@ pipeline {
 			steps {
 				echo "Integration Test"
 				sh "mvn failsafe:integration-test failsafe:verify"
+			}
+		}
+		stage('Build Docker Image') {
+			steps {
+				echo "Build Docker Image"
+				//"docker build -t asasgray/currency-exchange-devops:$env.BUILD_TAG"
+				script {
+					dockerImage = docker.build("asasgray/currency-exchange-devops:$env.BUILD_TAG")
+				}
+			}
+		}
+		stage('Push Docker Image') {
+			steps {
+				echo "Push Docker Image"
+				script {
+					// arg1=default to dockerhub repo.
+					// arg2=Id set in Global Credentials.
+					docker.withRegistry('', 'dockerhub') {
+						dockerImage.push();
+						dockerImage.push('latest');
+					}
+				}
+			}
+		}
+		stage('Package') {
+			steps {
+				echo "Package Step"
+				sh "mvn package -DskipTests"
 			}
 		}
 	}
