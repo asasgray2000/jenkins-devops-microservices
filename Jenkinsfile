@@ -1,3 +1,6 @@
+// Repo - https://github.com/asasgray2000/jenkins-devops-microservices/
+// Java files located in the parent directory.
+
 // SCRIPTED
 // Stages are not required.
 // node {
@@ -15,8 +18,7 @@
 // DECLARATIVE
 pipeline {
 	agent any
-	//agent { docker { image 'maven' } }
-	environment {
+ 	environment {
 		// Names are from the Jenkins configurations.
 		// Manage Jenkins -> Global Tool Configuration
 		dockerHome = tool 'myDocker'
@@ -25,9 +27,9 @@ pipeline {
 		PATH = "$PATH:$dockerHome/bin:$mavenHome/bin"
 	}
 	stages {
-		stage('Build') {
+		stage('Checkout') {
 			steps {
-				echo "Build Step"
+				echo "Checkout Step"
 				echo "PATH - $PATH"
 				echo "BUILD_NUMBER - $env.BUILD_NUMBER"
 				echo "BUILD_TAG - $env.BUILD_TAG"
@@ -36,14 +38,22 @@ pipeline {
 				sh "docker --version"
 			}
 		}
+		stage('Compile') {
+			steps {
+				echo "Compile Step"
+				sh "mvn clean install"
+			}
+		}
 		stage('Test') {
 			steps {
 				echo "Test Step"
+				sh "mvn test"
 			}
 		}
 		stage('Integration Test') {
 			steps {
 				echo "Integration Test"
+				sh "mvn failsafe:integration-test failsafe:verify"
 			}
 		}
 	}
