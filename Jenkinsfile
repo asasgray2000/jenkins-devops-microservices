@@ -65,7 +65,11 @@ pipeline {
 				echo "Build Docker Image"
 				//"docker build -t asasgray/currency-exchange-devops:$env.BUILD_TAG"
 				script {
-					dockerImage = docker.build("asasgray/currency-exchange-devops:$env.BUILD_TAG")
+					// arg1=default to dockerhub repo.
+					// arg2=Id set in Global Credentials.
+					docker.withRegistry('', 'dockerhub') {
+						dockerImage = docker.build("asasgray/currency-exchange-devops:$env.BUILD_TAG")
+					}
 				}
 			}
 		}
