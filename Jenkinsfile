@@ -66,7 +66,7 @@ pipeline {
 				script {
 					// arg1=default to dockerhub repo.
 					// arg2=Id set in Global Credentials.
-					docker.withRegistry('', 'dockerhub') {
+					docker.withRegistry('https://hub.docker.com/', 'dockerhub') {
 						dockerImage = docker.build("asasgray/currency-exchange-devops:$env.BUILD_TAG")
 					}
 				}
