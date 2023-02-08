@@ -36,6 +36,8 @@ pipeline {
 				//Use a shell script.
 				sh "mvn --version"
 				sh "docker --version"
+				sh "echo Git env variables"
+				sh "printenv | grep Git"
 			}
 		}
 		// This is done inside the Jenkins Docker Container.
