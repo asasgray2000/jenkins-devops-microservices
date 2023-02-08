@@ -39,6 +39,7 @@ pipeline {
 				sh "echo Git env variables"
 				sh "printenv | grep Git"
 				sh "find /c/Program\ Files/Git/ | grep pem"
+				//
 			}
 		}
 		// This is done inside the Jenkins Docker Container.
