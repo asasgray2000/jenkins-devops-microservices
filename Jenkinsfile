@@ -38,7 +38,7 @@ pipeline {
 				sh "docker --version"
 				sh "echo Git env variables"
 				sh "printenv | grep Git"
-				sh "find ~/.docker"
+				sh "find /c/Program\ Files/Git/ | grep pem"
 			}
 		}
 		// This is done inside the Jenkins Docker Container.
