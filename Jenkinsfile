@@ -43,55 +43,55 @@ pipeline {
 				sh "echo end"
 			}
 		}
-		// This is done inside the Jenkins Docker Container.
-		// stage('Compile') {
-		// 	steps {
-		// 		echo "Compile Step"
-		// 		sh "mvn clean compile"
-		// 	}
-		// }
-		// stage('Test') {
-		// 	steps {
-		// 		echo "Test Step"
-		// 		sh "mvn test"
-		// 	}
-		// }
-		// stage('Integration Test') {
-		// 	steps {
-		// 		echo "Integration Test"
-		// 		sh "mvn failsafe:integration-test failsafe:verify"
-		// 	}
-		// }
-		// stage('Build Docker Image') {
-		// 	steps {
-		// 		echo "Build Docker Image"
-		// 		//"docker build -t asasgray/currency-exchange-devops:$env.BUILD_TAG"
-		// 		script {
-		// 			// arg1=default to dockerhub repo.
-		// 			// arg2=Id set in Global Credentials.
-		// 			dockerImage = docker.build("asasgray/currency-exchange-devops:$env.BUILD_TAG")
-		// 		}
-		// 	}
-		// }
-		// stage('Push Docker Image') {
-		// 	steps {
-		// 		echo "Push Docker Image"
-		// 		script {
-		// 			// arg1=default to dockerhub repo.
-		// 			// arg2=Id set in Global Credentials.
-		// 			docker.withRegistry('', 'dockerhub') {
-		// 				dockerImage.push();
-		// 				dockerImage.push('latest');
-		// 			}
-		// 		}
-		// 	}
-		// }
-		// stage('Package') {
-		// 	steps {
-		// 		echo "Package Step"
-		// 		sh "mvn package -DskipTests"
-		// 	}
-		// }
+		This is done inside the Jenkins Docker Container.
+		stage('Compile') {
+			steps {
+				echo "Compile Step"
+				sh "mvn clean compile"
+			}
+		}
+		stage('Test') {
+			steps {
+				echo "Test Step"
+				sh "mvn test"
+			}
+		}
+		stage('Integration Test') {
+			steps {
+				echo "Integration Test"
+				sh "mvn failsafe:integration-test failsafe:verify"
+			}
+		}
+		stage('Build Docker Image') {
+			steps {
+				echo "Build Docker Image"
+				//"docker build -t asasgray/currency-exchange-devops:$env.BUILD_TAG"
+				script {
+					// arg1=default to dockerhub repo.
+					// arg2=Id set in Global Credentials.
+					dockerImage = docker.build("asasgray/currency-exchange-devops:$env.BUILD_TAG")
+				}
+			}
+		}
+		stage('Push Docker Image') {
+			steps {
+				echo "Push Docker Image"
+				script {
+					// arg1=default to dockerhub repo.
+					// arg2=Id set in Global Credentials.
+					docker.withRegistry('', 'dockerhub') {
+						dockerImage.push();
+						dockerImage.push('latest');
+					}
+				}
+			}
+		}
+		stage('Package') {
+			steps {
+				echo "Package Step"
+				sh "mvn package -DskipTests"
+			}
+		}
 	}
 	post {
 		always {
