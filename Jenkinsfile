@@ -41,7 +41,9 @@ pipeline {
 				sh "pwd"
 				sh "ls -la /"
 				sh "whoami"
+				sh "docker images"
 				//sh "find /| grep pem"
+				sh "ls -l /cert*"
 				sh "echo end"
 			}
 		}
@@ -67,6 +69,8 @@ pipeline {
 		stage('Build Docker Image') {
 			steps {
 				echo "Build Docker Image"
+				sh "export DOCKER_CERT_PATH=/certs/client"
+				sh "echo $DOCKER_CERT_PATH"
 				//"docker build -t asasgray/currency-exchange-devops:$env.BUILD_TAG"
 				script {
 					// arg1=default to dockerhub repo.
