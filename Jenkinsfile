@@ -38,7 +38,9 @@ pipeline {
 				sh "docker --version"
 				sh "echo Git env variables"
 				sh "printenv | grep Git"
+				sh "pwd"
 				sh "ls -la /"
+				sh "whoami"
 				//sh "find /| grep pem"
 				sh "echo end"
 			}
