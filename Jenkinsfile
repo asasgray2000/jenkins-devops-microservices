@@ -41,7 +41,6 @@ pipeline {
 				sh "pwd"
 				sh "ls -la /"
 				sh "whoami"
-				sh "docker images"
 				//sh "find /| grep pem"
 				sh "ls -l /cert*"
 				sh "echo end"
