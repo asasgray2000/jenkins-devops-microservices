@@ -38,11 +38,12 @@ pipeline {
 				sh "docker --version"
 				sh "echo Git env variables"
 				sh "printenv | grep Git"
+				sh "printenv | grep cert"
 				sh "pwd"
 				sh "ls -la /"
 				sh "whoami"
 				//sh "find /| grep pem"
-				sh "ls -l /cert*"
+				sh "find /certs/client"
 				sh "echo end"
 			}
 		}
@@ -70,27 +71,27 @@ pipeline {
 				echo "Build Docker Image"
 				sh "export DOCKER_CERT_PATH=/certs/client"
 				sh "echo $DOCKER_CERT_PATH"
-				//"docker build -t asasgray/currency-exchange-devops:$env.BUILD_TAG"
-				script {
-					// arg1=default to dockerhub repo.
-					// arg2=Id set in Global Credentials.
-					dockerImage = docker.build("asasgray/currency-exchange-devops:$env.BUILD_TAG")
-				}
+				"docker build -t asasgray/currency-exchange-devops:$env.BUILD_TAG"
+				// script {
+				// 	// arg1=default to dockerhub repo.
+				// 	// arg2=Id set in Global Credentials.
+				// 	dockerImage = docker.build("asasgray/currency-exchange-devops:$env.BUILD_TAG")
+				// }
 			}
 		}
-		stage('Push Docker Image') {
-			steps {
-				echo "Push Docker Image"
-				script {
-					// arg1=default to dockerhub repo.
-					// arg2=Id set in Global Credentials.
-					docker.withRegistry('', 'dockerhub') {
-						dockerImage.push();
-						dockerImage.push('latest');
-					}
-				}
-			}
-		}
+		// stage('Push Docker Image') {
+		// 	steps {
+		// 		echo "Push Docker Image"
+		// 		script {
+		// 			// arg1=default to dockerhub repo.
+		// 			// arg2=Id set in Global Credentials.
+		// 			docker.withRegistry('', 'dockerhub') {
+		// 				dockerImage.push();
+		// 				dockerImage.push('latest');
+		// 			}
+		// 		}
+		// 	}
+		// }
 		stage('Package') {
 			steps {
 				echo "Package Step"
