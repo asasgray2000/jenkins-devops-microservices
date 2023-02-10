@@ -43,7 +43,7 @@ pipeline {
 				sh "echo end"
 			}
 		}
-		This is done inside the Jenkins Docker Container.
+		//This is done inside the Jenkins Docker Container.
 		stage('Compile') {
 			steps {
 				echo "Compile Step"
