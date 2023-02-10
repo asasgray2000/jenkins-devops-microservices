@@ -71,7 +71,7 @@ pipeline {
 				echo "Build Docker Image"
 				sh "export DOCKER_CERT_PATH=/certs/client"
 				sh "echo $DOCKER_CERT_PATH"
-				"docker build -t asasgray/currency-exchange-devops:$env.BUILD_TAG"
+				sh "docker build -t asasgray/currency-exchange-devops:$env.BUILD_TAG"
 				// script {
 				// 	// arg1=default to dockerhub repo.
 				// 	// arg2=Id set in Global Credentials.
