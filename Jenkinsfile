@@ -71,8 +71,8 @@ pipeline {
 				echo "Build Docker Image"
 				sh "export DOCKER_CERT_PATH=/certs/client"
 				sh "echo $DOCKER_CERT_PATH"
-				sh "mkdir -p C:/Program\ Files/Git/certs/client/"
-				sh "cp -f /certs/client/* C:/Program\ Files/Git/certs/client/"
+				//sh "mkdir -p C:/Program\ Files/Git/certs/client/"
+				//sh "cp -f /certs/client/* C:/Program\ Files/Git/certs/client/"
 				sh "docker build -t asasgray/currency-exchange-devops:$env.BUILD_TAG ."
 				// script {
 				// 	// arg1=default to dockerhub repo.
