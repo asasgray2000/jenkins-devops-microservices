@@ -67,6 +67,7 @@ pipeline {
 			}
 		}
 		stage('Build Docker Image') {
+			agent any
 			steps {
 				echo "Build Docker Image"
 				sh "export DOCKER_CERT_PATH=/certs/client"
