@@ -36,9 +36,9 @@ pipeline {
 				//Use a shell script.
 				sh "mvn --version"
 				sh "docker --version"
-				sh "echo Git env variables"
-				sh "printenv | grep Git"
-				sh "printenv | grep cert"
+				// sh "echo Git env variables"
+				// sh "printenv | grep Git"
+				// sh "printenv | grep cert"
 				sh "pwd"
 				sh "ls -la /"
 				sh "whoami"
